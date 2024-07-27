@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zja.sxau.govenmentadmin.mapper.WindowMapper">
+    <resultMap id="WindowResultMap" type="com.zja.sxau.govenmentadmin.entity.Window">
+        <id property="windowId" column="window_id" />
+        <result property="windowName" column="window_name" />
+        <result property="serviceId" column="service_id" />
+        <result property="status" column="status" />
+    </resultMap>
+
+    <select id="getAllWindows" resultMap="WindowResultMap">
+        SELECT * FROM windows
+    </select>
+
+    <select id="getWindowById" resultMap="WindowResultMap">
+        SELECT * FROM windows WHERE window_id = #{windowId}
+    </select>
+
+    <insert id="insertWindow">
+        INSERT INTO windows (window_name, service_id, status)
+        VALUES (#{windowName}, #{serviceId}, #{status})
+    </insert>
+
+    <update id="updateWindow">
+        UPDATE windows
+        SET window_name = #{windowName}, service_id = #{serviceId}, status = #{status}
+        WHERE window_id = #{windowId}
+    </update>
+
+    <delete id="deleteWindow">
+        DELETE FROM windows WHERE window_id = #{windowId}
+    </delete>
+</mapper>

@@ -80,7 +80,7 @@
             <version>3.0.3</version>
             <scope>test</scope>
         </dependency>
-
+<!--Redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -95,12 +95,31 @@
             <artifactId>easy-captcha</artifactId>
             <version>1.6.2</version>
         </dependency>
-
+<!--验证码-->
         <dependency>
             <groupId>com.github.bingoohuang</groupId>
             <artifactId>patchca</artifactId>
             <version>0.0.1</version>
         </dependency>
+<!--MD5-->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+        </dependency>
+
+<!--        Knife4j-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.github.xiaoymin</groupId>-->
+<!--            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>-->
+<!--            <version>4.0.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-ui</artifactId>-->
+<!--            <version>1.6.14</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 

@@ -8,18 +8,18 @@ import com.github.bingoohuang.patchca.utils.encoder.EncoderHelper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-@CrossOrigin(origins = "*")
-@Controller
+
+@RestController
 public class CaptchaController {
 
     @Autowired
@@ -39,6 +39,7 @@ public class CaptchaController {
         captchaService.setWordFactory(wordFactory);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/captcha")
     public void getCaptcha(HttpServletResponse response, @RequestParam String uuid) throws IOException {
         response.setContentType("image/png");
@@ -46,9 +47,11 @@ public class CaptchaController {
         redisTemplate.opsForValue().set("captcha:" + uuid, captcha, 5, TimeUnit.MINUTES);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/verifyCaptcha")
-    public boolean verifyCaptcha(@RequestParam String uuid, @RequestParam String code) {
+    public ResponseEntity<Boolean> verifyCaptcha(@RequestParam String uuid, @RequestParam String code) {
         String captcha = redisTemplate.opsForValue().get("captcha:" + uuid);
-        return captcha != null && captcha.equalsIgnoreCase(code);
+        boolean isValid = captcha != null && captcha.equalsIgnoreCase(code);
+        return ResponseEntity.ok(isValid);
     }
 }
