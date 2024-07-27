@@ -43,6 +43,11 @@ public class AdminServiceImpl implements AdminService {
         return null;
     }
 
+    @Override
+    public void updateProfile(Admin updatedAdmin) {
+         adminMapper.updateProfile(updatedAdmin);
+    }
+
     private String generateToken() {
         return DigestUtils.md5Hex(System.currentTimeMillis() + Math.random() + "");
     }

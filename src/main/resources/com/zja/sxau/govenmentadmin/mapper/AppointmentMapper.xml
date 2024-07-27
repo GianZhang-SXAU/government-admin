@@ -1,0 +1,41 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zja.sxau.govenmentadmin.mapper.AppointmentMapper">
+
+    <resultMap id="appointmentResultMap" type="com.zja.sxau.govenmentadmin.entity.Appointment">
+        <id property="appointmentId" column="appointment_id" />
+        <result property="serviceId" column="service_id" />
+        <result property="phoneNumber" column="phone_number" />
+        <result property="documentType" column="document_type" />
+        <result property="documentNumber" column="document_number" />
+        <result property="appointmentDate" column="appointment_date" />
+        <result property="appointmentTime" column="appointment_time" />
+        <result property="status" column="status" />
+    </resultMap>
+
+    <select id="getAllAppointments" resultMap="appointmentResultMap">
+        SELECT * FROM appointments
+    </select>
+
+    <select id="getAppointmentById" parameterType="int" resultMap="appointmentResultMap">
+        SELECT * FROM appointments WHERE appointment_id = #{appointmentId}
+    </select>
+
+    <insert id="insertAppointment" parameterType="com.zja.sxau.govenmentadmin.entity.Appointment">
+        INSERT INTO appointments (user_id, phone_number, document_type, document_number, appointment_date, appointment_time, status)
+        VALUES (#{userId}, #{phoneNumber}, #{documentType}, #{documentNumber}, #{appointmentDate}, #{appointmentTime}, #{status})
+    </insert>
+
+    <update id="updateAppointment" parameterType="com.zja.sxau.govenmentadmin.entity.Appointment">
+        UPDATE appointments
+        SET service_id = #{serviceId}, phone_number = #{phoneNumber}, document_type = #{documentType}, document_number = #{documentNumber}, appointment_date = #{appointmentDate}, appointment_time = #{appointmentTime}, status = #{status}
+        WHERE appointment_id = #{appointmentId}
+    </update>
+
+    <delete id="deleteAppointment" parameterType="int">
+        DELETE FROM appointments WHERE appointment_id = #{appointmentId}
+    </delete>
+
+</mapper>

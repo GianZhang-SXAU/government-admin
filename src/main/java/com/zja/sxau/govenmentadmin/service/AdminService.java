@@ -6,4 +6,6 @@ import jakarta.servlet.http.HttpServletResponse;
 public interface AdminService {
     public void register(Admin admin);
     public Admin login(String username, String password, HttpServletResponse response);
+
+    void updateProfile(Admin updatedAdmin);
 }
