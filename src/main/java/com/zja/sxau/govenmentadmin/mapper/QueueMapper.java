@@ -20,4 +20,6 @@ public interface QueueMapper {
     void updateQueue(Queue queue);
 
     void deleteQueue(int queueId);
+
+
 }

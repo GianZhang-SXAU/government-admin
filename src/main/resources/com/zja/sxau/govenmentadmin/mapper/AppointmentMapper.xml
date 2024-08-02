@@ -23,6 +23,9 @@
     <select id="getAppointmentById" parameterType="int" resultMap="appointmentResultMap">
         SELECT * FROM appointments WHERE appointment_id = #{appointmentId}
     </select>
+    <select id="getAppointmentsByDocumentNumber" resultType="com.zja.sxau.govenmentadmin.entity.Appointment">
+        SELECT * FROM appointments WHERE document_number = #{documentNumber}
+    </select>
 
     <insert id="insertAppointment" parameterType="com.zja.sxau.govenmentadmin.entity.Appointment">
         INSERT INTO appointments (username,service_id, phone_number, document_type, document_number, appointment_date, status)

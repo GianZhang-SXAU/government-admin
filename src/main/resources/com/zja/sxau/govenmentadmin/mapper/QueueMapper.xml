@@ -14,8 +14,8 @@
     </select>
 
     <insert id="insertQueue" parameterType="com.zja.sxau.govenmentadmin.entity.Queue">
-        INSERT INTO queue (appointment_id, queue_number, window_id, queue_status, called_time)
-        VALUES (#{appointmentId}, #{queueNumber}, #{queueStatus}, #{calledTime}, #{windowId})
+        INSERT INTO queue (appointment_id, queue_number, window_id, queue_status, called_time,order_number)
+        VALUES (#{appointmentId}, #{queueNumber},#{windowId}, #{queueStatus}, #{calledTime}, #{orderNumber})
     </insert>
 
     <update id="updateQueue" parameterType="com.zja.sxau.govenmentadmin.entity.Queue">

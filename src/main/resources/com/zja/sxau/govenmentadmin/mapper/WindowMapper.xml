@@ -19,6 +19,13 @@
         SELECT * FROM windows WHERE window_id = #{windowId}
     </select>
 
+    <select id="findByServiceIdAndStatus" resultType="com.zja.sxau.govenmentadmin.entity.Window">
+        SELECT * FROM windows WHERE service_id = #{serviceId} AND status = 'open'
+    </select>
+    <select id="countWaitingQueueByWindowId" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM queue WHERE window_id = #{windowId} AND queue_status = 'waiting'
+    </select>
+
     <insert id="insertWindow">
         INSERT INTO windows (window_name, service_id, status)
         VALUES (#{windowName}, #{serviceId}, #{status})

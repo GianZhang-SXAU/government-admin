@@ -21,4 +21,5 @@ public interface AppointmentMapper {
 
     void deleteAppointment(int appointmentId);
 
+    List<Appointment> getAppointmentsByDocumentNumber(String documentNumber);
 }
