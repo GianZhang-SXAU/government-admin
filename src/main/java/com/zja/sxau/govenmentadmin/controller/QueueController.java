@@ -2,6 +2,7 @@ package com.zja.sxau.govenmentadmin.controller;
 
 import com.zja.sxau.govenmentadmin.entity.Appointment;
 import com.zja.sxau.govenmentadmin.entity.Queue;
+import com.zja.sxau.govenmentadmin.entity.VO.QueueResponse;
 import com.zja.sxau.govenmentadmin.service.QueueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -56,6 +57,7 @@ public class QueueController {
      * @return void
      * 点击立即叫号后，选择一个预约条目后，立即根据ServiceId查询可用窗口，根据当天的顺序存储在Redis中，并新加一个状态栏
      * */
+
     @GetMapping("/{documentNumber}")
     public List<Appointment> getAppointmentByDocumentNumber(@PathVariable String documentNumber) {
 //        1.查询预约订单
@@ -63,14 +65,16 @@ public class QueueController {
     }
 
     @PostMapping("/queuemethod")
-    public ResponseEntity<String> addQueueMethod(@RequestBody Appointment appointment) {
+    public ResponseEntity<?> addQueueMethod(@RequestBody Appointment appointment) {
         Queue queue = queueService.queryMethod(appointment);
         if (queue != null) {
-            return ResponseEntity.ok("取号成功，取号码为："+queue.getQueueNumber());
+            QueueResponse response = new QueueResponse("取号成功", queue);
+            return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("取号失败");
         }
     }
+
 
     @GetMapping("/all")
     public ResponseEntity<List<String>> getAllQueueInfo() {
