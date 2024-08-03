@@ -170,11 +170,17 @@ public class QueueServiceImpl implements QueueService {
         String redisValue = String.format("DocumentLastFour: %s, QueueNumber: %04d, ServiceId: %d, WindowId: %d, OrderNumber: %s",
                 lastFourDigits, queue.getQueueNumber(), appointment.getServiceId(), window.getWindowId(), queue.getOrderNumber());
 
-        // 将排队信息存储到Redis，设置过期时间为30分钟
-        redisTemplate.opsForValue().set(redisKey, redisValue, 30, TimeUnit.MINUTES);
+        // 将排队信息追加到Redis列表中
+        redisTemplate.opsForList().rightPush(redisKey, redisValue);
 
-        // 存储订单号
-        redisTemplate.opsForValue().set(ORDER_NUMBER_KEY + queue.getOrderNumber(), redisKey, 30, TimeUnit.MINUTES);
+        // 设置列表过期时间为30分钟
+        redisTemplate.expire(redisKey, 30, TimeUnit.MINUTES);
+
+        // 存储订单号，并追加到列表中
+        String orderNumberKey = ORDER_NUMBER_KEY + queue.getOrderNumber();
+        redisTemplate.opsForList().rightPush(orderNumberKey, redisKey);
+        redisTemplate.expire(orderNumberKey, 30, TimeUnit.MINUTES);
     }
+
 
 }

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -77,20 +78,43 @@ public class QueueController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<List<String>> getAllQueueInfo() {
-        // 获取Redis中所有键以 "queue:" 开头的键集合
+    public ResponseEntity<?> getAllQueueInfo() {
+        // 获取Redis中所有以 "queue:" 开头的键集合
         Set<String> keys = redisTemplate.keys("queue:*");
 
         if (keys == null || keys.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(List.of("Redis中没有排队信息，请检查Redis连接或者今天是否有排队数据"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Redis中没有排队信息，请检查Redis连接或者今天是否有排队数据");
         }
 
-        // 从Redis中获取所有对应的值
-        List<String> queueInfos = keys.stream()
-                .map(key -> redisTemplate.opsForValue().get(key))
-                .collect(Collectors.toList());
+        List<String> queueInfos = new ArrayList<>();
+
+        for (String key : keys) {
+            String keyType = redisTemplate.type(key).code(); // 获取键的类型
+
+            if ("string".equals(keyType)) {
+                // 处理字符串类型的键
+                String value = redisTemplate.opsForValue().get(key);
+                if (value != null) {
+                    queueInfos.add(value);
+                }
+            } else if ("list".equals(keyType)) {
+                // 处理列表类型的键
+                List<String> listValues = redisTemplate.opsForList().range(key, 0, -1);
+                if (listValues != null && !listValues.isEmpty()) {
+                    queueInfos.addAll(listValues); // 添加所有列表元素到结果集合
+                }
+            } else {
+                // 记录下不匹配的类型，或处理其他类型
+                System.out.println("Skipping key " + key + " with type " + keyType);
+            }
+        }
+
+        if (queueInfos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("没有可用的排队数据");
+        }
 
         return ResponseEntity.ok(queueInfos);
     }
+
 
 }
