@@ -107,7 +107,7 @@ public class QueueServiceImpl implements QueueService {
 //        3.使用算法，选择可用窗口中排队订单数量最少的窗口，分配排队数量最少的窗口
         Window assignedWindow = null;
         int minQueueCount = Integer.MAX_VALUE;
-
+//      冒泡排序
         for (Window window : availableWindows) {
             int queueCount = windowMapper.countWaitingQueueByWindowId(window.getWindowId());
             if (queueCount < minQueueCount) {
@@ -158,10 +158,22 @@ public class QueueServiceImpl implements QueueService {
         return Math.toIntExact(queueNumber);
     }
 
+    /*
+     * @Author 张建安
+     * @parma
+     * @return String
+     * 订单号生成
+     * */
     private String generateOrderNumber() {
         return "ORDER-" + (int)(Math.random() * 100000000);
     }
 
+    /*
+     * @Author 张建安
+     * @parma Appointment appointment, Queue queue, Window window
+     * @return void
+     * 订单号生成
+     * */
     //    将数据存储在Redis中，随后将使用Redis进行排队大屏的展示
     private void storeQueueInfoInRedis(Appointment appointment, Queue queue, Window window) {
         String lastFourDigits = appointment.getDocumentNumber().substring(Math.max(appointment.getDocumentNumber().length() - 4, 0));
