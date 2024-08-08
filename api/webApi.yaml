@@ -1,0 +1,550 @@
+openapi: 3.1.0
+info:
+  title: 政务服务大厅预约与排队系统
+  description: 政务服务大厅预约与排队系统接口文档
+  contact:
+      name: 张建安
+      url: http://www.https://github.com/GianZhang-SXAU/government-admin
+      email: zhangjianan545@gmail.com
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8888'
+    description: 开发地址
+
+tags:
+    - name: 管理员相关接口
+    - name: 验证码相关接口
+    - name: 政务大厅窗口相关接口
+paths:
+    /windows/{id}:
+      get:
+        summary: 根据窗口id查询窗口信息
+        deprecated: false
+        description: 根据窗口id查找窗口
+        tags:
+          - 政务大厅窗口相关接口
+        parameters:
+          - name: id
+            in: path
+            description: 窗口id号
+            required: true
+            example: '1'
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties: { }
+        security: [ ]
+      put:
+        summary: 更新窗口信息
+        deprecated: false
+        description: ''
+        tags:
+          - 政务大厅窗口相关接口
+        parameters:
+          - name: id
+            in: path
+            description: 窗口id
+            required: true
+            schema:
+              type: integer
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  window_id:
+                    description: 窗口ID
+                    type: integer
+                    minimum: 1
+                    maximum: 2147483647
+                  window_name:
+                    description: 窗口名称
+                    type: string
+                    maxLength: 100
+                  service_id:
+                    description: 服务ID
+                    type: integer
+                    minimum: -2147483648
+                    maximum: 2147483647
+                  status:
+                    description: 窗口状态
+                    type: string
+                    enum:
+                      - open
+                      - closed
+                required:
+                  - window_id
+                  - window_name
+                  - service_id
+                  - status
+        responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties: { }
+        security: [ ]
+      delete:
+        summary: 删除窗口
+        deprecated: false
+        description: ''
+        tags:
+          - 政务大厅窗口相关接口
+        parameters:
+          - name: id
+            in: path
+            description: ''
+            required: true
+            schema:
+              type: string
+        responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties: { }
+        security: [ ]
+    /windows:
+      get:
+        summary: 获取所有窗口信息
+        deprecated: false
+        description: ''
+        tags:
+          - 政务大厅窗口相关接口
+        parameters: [ ]
+        responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties: { }
+        security: [ ]
+      post:
+        summary: 新增窗口
+        deprecated: false
+        description: ''
+        tags:
+          - 政务大厅窗口相关接口
+        parameters: [ ]
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  window_id:
+                    description: 窗口ID
+                    type: integer
+                    minimum: 1
+                    maximum: 2147483647
+                  window_name:
+                    description: 窗口名称
+                    type: string
+                    maxLength: 100
+                  service_id:
+                    description: 服务ID
+                    type: integer
+                    minimum: -2147483648
+                    maximum: 2147483647
+                  status:
+                    description: 窗口状态
+                    type: string
+                    enum:
+                      - open
+                      - closed
+                required:
+                  - window_id
+                  - window_name
+                  - service_id
+                  - status
+        responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties: { }
+        security: [ ]
+    /captcha:
+      get:
+        summary: 获取验证码
+        deprecated: false
+        description: ''
+        tags:
+          - 验证码相关接口
+        parameters: [ ]
+        responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties: { }
+        security: [ ]
+    /verifyCaptcha:
+      get:
+        summary: 验证验证码
+        deprecated: false
+        description: ''
+        tags:
+          - 验证码相关接口
+        parameters: [ ]
+        responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties: { }
+        security: [ ]
+    /admin/register:
+      post:
+        summary: 管理员注册
+        deprecated: false
+        description: ''
+        tags:
+          - 管理员相关接口
+        parameters: [ ]
+        responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties: { }
+        security: [ ]
+    /admin/login:
+      post:
+        summary: 管理员登陆
+        deprecated: false
+        description: ''
+        tags:
+          - 管理员相关接口
+        parameters: [ ]
+        responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties: { }
+        security: [ ]
+components:
+    schemas:
+      窗口模型:
+        properties:
+          window_id:
+            description: 窗口ID
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+          window_name:
+            description: 窗口名称
+            type: string
+            maxLength: 100
+          service_id:
+            description: 服务ID
+            type: integer
+            minimum: -2147483648
+            maximum: 2147483647
+          status:
+            description: 窗口状态
+            type: string
+            enum:
+              - open
+              - closed
+        type: object
+        required:
+          - window_id
+          - window_name
+          - service_id
+          - status
+      预约排队模型:
+        properties:
+          reservation_id:
+            description: 预定号
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+          user_id:
+            description: 用户id
+            type: integer
+            minimum: -2147483648
+            maximum: 2147483647
+          service_id:
+            description: 服务id
+            type: integer
+            minimum: -2147483648
+            maximum: 2147483647
+          reservation_date:
+            description: 预定日期
+            type: string
+            format: date
+          reservation_time:
+            description: 预定时间
+            type: string
+            format: time
+          status:
+            description: 状态
+            default: Pending
+            type: string
+            maxLength: 20
+          created_at:
+            description: 创建时间
+            default: CURRENT_TIMESTAMP
+            type: string
+        type: object
+        required:
+          - reservation_id
+          - user_id
+          - service_id
+          - reservation_date
+          - reservation_time
+          - created_at
+      服务模型:
+        properties:
+          service_id:
+            description: 服务ID
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+          service_name:
+            description: 服务名称
+            type: string
+            maxLength: 100
+          description:
+            description: 服务描述
+            type: string
+            maxLength: 65535
+        type: object
+        required:
+          - service_id
+          - service_name
+      用户模型:
+        properties:
+          user_id:
+            description: 用户编号
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+          name:
+            description: 用户姓名
+            type: string
+            maxLength: 255
+          phone:
+            description: 电话号
+            type: string
+            maxLength: 15
+          idcard:
+            description: 身份证号
+            type: string
+            maxLength: 100
+          password:
+            description: 密码
+            type: string
+            maxLength: 255
+          location:
+            description: 所在地区
+            type: string
+            maxLength: 255
+          city:
+            description: 县
+            type: string
+            maxLength: 255
+          district:
+            description: 市
+            type: string
+            maxLength: 255
+          province:
+            description: 省
+            type: string
+            maxLength: 255
+          work:
+            description: 工作单位
+            type: string
+            maxLength: 255
+          profession:
+            description: 身份
+            type: string
+            maxLength: 255
+        type: object
+        required:
+          - user_id
+          - name
+          - phone
+          - idcard
+          - password
+      排队模型:
+        properties:
+          queue_id:
+            description: 排队ID
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+          appointment_id:
+            description: 预约ID
+            type: integer
+            minimum: -2147483648
+            maximum: 2147483647
+          window_id:
+            description: 窗口ID
+            type: integer
+            minimum: -2147483648
+            maximum: 2147483647
+          queue_number:
+            description: 排队号码
+            type: integer
+            minimum: -2147483648
+            maximum: 2147483647
+          queue_status:
+            description: 排队状态
+            type: string
+            enum:
+              - waiting
+              - processing
+              - completed
+          called_time:
+            description: 呼叫时间
+            type: string
+            format: date
+          order_number:
+            description: 订单号
+            type: string
+            maxLength: 20
+        type: object
+        required:
+          - queue_id
+          - appointment_id
+          - window_id
+          - queue_number
+          - queue_status
+          - order_number
+      评论模型:
+        properties:
+          comment_id:
+            description: 评论号
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+          user_id:
+            description: 用户信息
+            type: integer
+            minimum: -2147483648
+            maximum: 2147483647
+          service_id:
+            description: 服务信息
+            type: integer
+            minimum: -2147483648
+            maximum: 2147483647
+          content:
+            description: 评论
+            type: string
+            maxLength: 65535
+          created_at:
+            description: 创建时间
+            default: CURRENT_TIMESTAMP
+            type: string
+        type: object
+        required:
+          - comment_id
+          - user_id
+          - service_id
+          - content
+          - created_at
+      预约信息模型:
+        properties:
+          appointment_id:
+            description: 预约ID
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+          username:
+            description: 预约人姓名
+            type: string
+            maxLength: 255
+          service_id:
+            description: 服务ID
+            type: integer
+            minimum: -2147483648
+            maximum: 2147483647
+          phone_number:
+            description: 手机号
+            type: string
+            maxLength: 20
+          document_type:
+            description: 证件类型
+            type: string
+            maxLength: 255
+          document_number:
+            description: 证件号
+            type: string
+            maxLength: 255
+          appointment_date:
+            description: 预约日期
+            type: string
+            format: date
+          status:
+            description: 预约状态
+            type: string
+            enum:
+              - pending
+              - confirmed
+              - cancelled
+              - completed
+              - unfinished
+        type: object
+        required:
+          - appointment_id
+          - service_id
+          - phone_number
+          - document_type
+          - document_number
+          - appointment_date
+          - status
+      管理员模型:
+        properties:
+          admin_id:
+            description: 管理员id
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+          username:
+            description: 用户名
+            type: string
+            maxLength: 50
+          password:
+            description: 密码
+            type: string
+            maxLength: 255
+          email:
+            description: 邮箱
+            type: string
+            maxLength: 100
+          phone:
+            description: 电话
+            type: string
+            maxLength: 20
+        type: object
+        required:
+          - admin_id
+          - username
+          - password
+    securitySchemes: { }
