@@ -40,3 +40,4 @@ build/
 /.VSCodeCounter/2024-08-02_23-30-31/results.json
 /.VSCodeCounter/2024-08-02_23-30-31/results.md
 /.VSCodeCounter/2024-08-02_23-30-31/results.txt
+!/src/main/java/com/zja/sxau/govenmentadmin/utils/data/AIModelData.java
