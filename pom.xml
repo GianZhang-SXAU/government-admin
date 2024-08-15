@@ -107,8 +107,18 @@
             <artifactId>commons-codec</artifactId>
             <version>1.15</version>
         </dependency>
+<!--&lt;!&ndash;   WebSocket &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-websocket</artifactId>-->
+<!--        </dependency>-->
+<!--&lt;!&ndash;        Neo4j&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-neo4j</artifactId>-->
+<!--        </dependency>-->
 
-<!--        Knife4j-->
+        <!--        Knife4j-->
 
 <!--        <dependency>-->
 <!--            <groupId>com.github.xiaoymin</groupId>-->

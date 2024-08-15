@@ -22,5 +22,8 @@ public interface ServiceMapper {
     @Delete("DELETE FROM services WHERE service_id=#{serviceId}")
     void delete(@Param("serviceId") Integer serviceId);
 
+    @Select("SELECT s.service_id, s.service_name, d.description FROM services s LEFT JOIN service_descriptions d ON s.service_id = d.service_id")
+    List<Service> getAllServicesWithDescriptions();
+
 
 }
