@@ -22,4 +22,7 @@ public interface CommitMapper {
     @Select("SELECT * FROM comment WHERE user_id = (SELECT user_id FROM users WHERE idcard = #{idCard})")
     List<Commit> findByUserIdCard(String idCard);
 
+    @Update("UPDATE comment SET user_id = #{userId}, service_id = #{serviceId}, content = #{content},created_at = #{createdAt} WHERE user_id=#{userId}")
+    void updateCommentById(Commit comment);
+
 }

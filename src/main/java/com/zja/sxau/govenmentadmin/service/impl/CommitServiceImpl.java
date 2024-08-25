@@ -36,6 +36,11 @@ public class CommitServiceImpl implements CommitService {
     }
 
     @Override
+    public void updateComment(Commit comment) {
+         commitMapper.updateCommentById(comment);
+    }
+
+    @Override
     public List<Commit> getCommentsByIdCard(String idCard) {
         return commitMapper.findByUserIdCard(idCard);
     }

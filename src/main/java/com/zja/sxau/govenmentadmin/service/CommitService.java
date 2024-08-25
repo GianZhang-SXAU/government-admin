@@ -13,7 +13,7 @@ public interface CommitService {
     public List<Commit> getAllComments();
     public void createComment(Commit comment);
     public void deleteComment(int commentId);
-
+    public void updateComment(Commit comment);
     public List<Commit> getCommentsByIdCard(String idCard);
     public String sanitizeContent(String content);
 }

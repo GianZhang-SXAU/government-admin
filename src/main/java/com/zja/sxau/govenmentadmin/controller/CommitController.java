@@ -46,6 +46,10 @@ public class CommitController {
         return commitService.getCommentsByIdCard(idCard);
     }
 
+    @PutMapping("/comment/update")
+    public void updateComment(@RequestBody Commit comment) {
+        commitService.updateComment(comment);
+    }
 
 
 }
