@@ -52,17 +52,20 @@ public class AdminController {
     @CrossOrigin(origins = "*")
     @PutMapping("/profile")
     public String updateProfile(@RequestBody Admin updatedAdmin, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            throw new RuntimeException("Session expired or not logged in");
-        }
-        Admin currentAdmin = (Admin) session.getAttribute("user");
-        if (currentAdmin == null) {
-            throw new RuntimeException("Not logged in");
-        }
-        updatedAdmin.setAdminId(currentAdmin.getAdminId());
+      /*
+      * 8.25：张建安 不知道我当时脑子抽了还是咋了，为啥用了Session，我前几天咋想的
+      * */
+//        HttpSession session = request.getSession(false);
+//        if (session == null) {
+//            throw new RuntimeException("Session expired or not logged in");
+//        }
+//        Admin currentAdmin = (Admin) session.getAttribute("user");
+//        if (currentAdmin == null) {
+//            throw new RuntimeException("Not logged in");
+//        }
+//        updatedAdmin.setAdminId(currentAdmin.getAdminId());
         adminService.updateProfile(updatedAdmin);
-        session.setAttribute("user", updatedAdmin);
+
         return "Profile updated";
     }
 }
