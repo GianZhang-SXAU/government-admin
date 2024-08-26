@@ -14,7 +14,6 @@ public interface AppointmentMapper {
 
     Appointment getAppointmentById(int appointmentId);
 
-
     void insertAppointment(Appointment appointment);
 
     void updateAppointment(Appointment appointment);

@@ -39,4 +39,10 @@ public class AppointmentController {
     public void deleteAppointment(@PathVariable int id) {
         appointmentService.deleteAppointment(id);
     }
+
+    @GetMapping("/search/{idCard}")
+    public List<Appointment> searchAppointment(@PathVariable String idCard) {
+        return appointmentService.getAppointmentsByIdCard(idCard);
+    }
+
 }

@@ -38,4 +38,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public void deleteAppointment(int appointmentId) {
         appointmentMapper.deleteAppointment(appointmentId);
     }
+
+    @Override
+    public List<Appointment> getAppointmentsByIdCard(String idNumber) {
+        return appointmentMapper.getAppointmentsByDocumentNumber(idNumber);
+    }
 }
