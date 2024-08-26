@@ -19,10 +19,10 @@ public interface CommitMapper {
     @Delete("DELETE FROM comment WHERE comment_id = #{commentId}")
     void deleteById(int commentId);
 
-    @Select("SELECT * FROM comment WHERE user_id = (SELECT user_id FROM users WHERE idcard = #{idCard})")
-    List<Commit> findByUserIdCard(String idCard);
 
-    @Update("UPDATE comment SET user_id = #{userId}, service_id = #{serviceId}, content = #{content},created_at = #{createdAt} WHERE user_id=#{userId}")
+    List<Commit> findByUserIdCard(String idcard);
+
+    @Update("UPDATE comment SET user_id = #{userId}, service_id = #{serviceId}, content = #{content},created_at = #{createdAt} WHERE comment_id = #{commentId}")
     void updateCommentById(Commit comment);
 
 }

@@ -4,4 +4,10 @@
 
 <mapper namespace="com.zja.sxau.govenmentadmin.mapper.CommitMapper">
 
+    <select id="findByUserIdCard" resultType="com.zja.sxau.govenmentadmin.entity.Commit">
+        SELECT c.comment_id, c.user_id, c.service_id, c.content, c.created_at
+        FROM comment c
+                 INNER JOIN users u ON c.user_id = u.user_id
+        WHERE u.idcard = #{idCard}
+    </select>
 </mapper>

@@ -43,11 +43,13 @@ public class CommitController {
 
     @GetMapping("/comment/user")
     public List<Commit> getCommentsByIdCard(@RequestParam("idCard") String idCard) {
+        System.out.println(idCard);
         return commitService.getCommentsByIdCard(idCard);
     }
 
     @PutMapping("/comment/update")
     public void updateComment(@RequestBody Commit comment) {
+        System.out.println(comment);
         commitService.updateComment(comment);
     }
 
